@@ -1,0 +1,40 @@
+name: crystalworld
+version: 0.1.0
+
+authors:
+  - Vlad Faust <mail@vladfaust.com>
+
+targets:
+  server:
+    main: src/bin/server.cr
+  cake:
+    main: src/bin/cake.cr
+
+crystal: 0.24.2
+
+license: MIT
+
+development_dependencies:
+  dotenv:
+    github: gdotdesign/cr-dotenv
+    version: ~> 0.1.0
+
+dependencies:
+  pg:
+    github: will/crystal-pg
+    version: ~> 0.14.1
+  migrate:
+    github: vladfaust/migrate.cr
+    tag: v0.2.0-pre.1
+  core:
+    github: vladfaust/core.cr
+    tag: v0.4.0-rc.2
+  prism:
+    github: vladfaust/prism
+    tag: v0.2.0-rc.4
+  jwt:
+    github: crystal-community/jwt
+    version: ~> 0.2.2
+  cake-bake:
+    github: vladfaust/cake-bake.cr
+    version: ~> 0.2.0
