@@ -1,6 +1,7 @@
 require "prism/router"
 require "./actions/**"
 
+# See http://github.vladfaust.com/prism/Prism/Router.html.
 class Router
   def self.new(cacher)
     Prism::Router.new(cacher) do

@@ -3,6 +3,7 @@ require "./jwt/settings"
 require "../../models/user"
 
 module Authentication
+  # An object holding Authentication logic. It will not decode JWT unless explicitly called `#auth`.
   class Authable < Prism::Authable
     include JWT::Settings
 

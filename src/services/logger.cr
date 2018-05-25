@@ -1,7 +1,7 @@
 require "logger"
 require "colorize"
 
-# A custom colored logger.
+# A custom singleton colored logger.
 #
 # ```
 # Services::Logger.initialize(Logger::DEBUG)
@@ -35,7 +35,7 @@ class Services::Logger
   end
 end
 
-# A globally accessible custom logger instance.
+# A globally accessible custom logger instance (essentialy a shortcut).
 def logger
   Services::Logger.instance
 end

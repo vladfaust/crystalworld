@@ -5,4 +5,6 @@ WORKDIR /app/
 ADD . /app
 ARG APP_ENV=production
 RUN shards build --production
+
+# Run server by default
 CMD ["bin/server"]

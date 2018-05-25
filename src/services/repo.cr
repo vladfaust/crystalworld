@@ -2,6 +2,7 @@ require "pg"
 require "core"
 require "core/logger/standard"
 
+# This service provides a global access to Core's Repository.
 class Services::Repository
   class_getter! instance : Core::Repository?
 
@@ -13,7 +14,7 @@ class Services::Repository
   end
 end
 
-# A globally accessible repository instance.
+# A globally accessible repository instance (essentialy a shortcut).
 def repo
   Services::Repository.instance
 end

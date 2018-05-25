@@ -1,6 +1,7 @@
 require "./settings"
 
 module Authentication::JWT
+  # This class encodes a User's data into JWT token.
   class Tokenizer
     include Settings
 
