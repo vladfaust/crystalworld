@@ -49,8 +49,8 @@ Crystal is a compiled language. It has different compilation modes, e.g. develop
 ### Development build
 
 1. Create an `/.env.development` file and put some environment variables there (see below)
-1. Apply migrations: `crystal src/cake.cr -- db:migrate` (or install [Cake](https://github.com/axvm/cake) and exec `cake db:migrate`)
-2. Launch the server in development mode: `crystal src/server.cr`
+1. Apply migrations: `crystal src/bin/cake.cr -- db:migrate` (or install [Cake](https://github.com/axvm/cake) and exec `cake db:migrate`)
+2. Launch the server in development mode: `crystal src/bin/server.cr`
 
 Example output:
 
