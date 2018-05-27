@@ -5,6 +5,8 @@ require "./actions/**"
 class Router
   def self.new(cacher)
     Prism::Router.new(cacher) do
+      get "/" # Just a 200 response
+
       post "/users", Actions::Users::Create
       put "/user", Actions::Users::Update
       post "/users/login", Actions::Users::Login
