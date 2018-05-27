@@ -3,7 +3,7 @@ require "migrate"
 require "./src/env"
 require "./src/services/logger"
 
-Services::Logger.init(Logger::DEBUG)
+Services::Logger.init(Logger::INFO)
 
 desc "Migrate database to the latest version"
 task :dbmigrate do
