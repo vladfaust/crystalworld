@@ -23,5 +23,5 @@ port = ENV["PORT"]?.try &.to_i || 5000 # ditto
 
 server = Prism::Server.new(host, port, handlers, logger)
 
-logger.debug("Welcome to the Crystal World! ✨ https://github.com/vladfaust/crystalworld")
+logger.info("Welcome to the Crystal World! ✨ https://github.com/vladfaust/crystalworld")
 server.listen(true) # *true* argument enables multi-process usage of a same port
