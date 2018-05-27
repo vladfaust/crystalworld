@@ -29,8 +29,8 @@ module Authentication
 
       begin
         # JWT is expected to contain "{user: {id: 42}}"
-        id = payload["user"].as(Hash)["id"].as(Int)
-      rescue ex : JSON::Error
+        id = payload["user"].as(Hash)["id"].as(Int64)
+      rescue ex : JSON::Error | TypeCastError
         logger.debug("Mailformed JWT: #{ex}")
         return nil
       end
