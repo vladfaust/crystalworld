@@ -33,7 +33,7 @@ Crystal is a compiled language. It has different compilation modes, e.g. develop
 
 ### Production build from the source code
 
-1. Build the app: `shards build --production`
+1. Build the app: `shards build --production --release --no-debug`
 2. Set env vars: `export DATABASE_URL="" JWT_SECRET_KEY=""`
 3. Apply migrations: `./bin/cake db:migrate`
 4. Launch the server: `./bin/server`
