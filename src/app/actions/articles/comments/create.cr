@@ -21,11 +21,8 @@ module Actions::Articles::Comments
       comment = Comment.new(article: article, author: auth.user, body: params[:comment][:body])
       halt!(400, "Invalid comment: #{comment.errors}") unless comment.valid?
 
-      repo.insert(comment)
-      comment = repo.query(Comment
-        .last
-        .join(:author, select: [:username])
-      ).first
+      comment = repo.insert(comment)
+      comment.author = repo.query(User.select(:username).where(id: auth.user.id)).first
 
       json(201, {
         comment: Decorators::Comment.new(comment),

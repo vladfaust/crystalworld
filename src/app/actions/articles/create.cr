@@ -33,8 +33,8 @@ module Actions::Articles
       )
 
       halt!(400, "Invalid article: #{article.errors}") unless article.valid?
-      repo.insert(article)
-      article = repo.query(Article.where(slug: slug).join(:author, select: [:username])).first
+      article = repo.insert(article)
+      article.author = repo.query(User.select(:username).where(id: auth.user.id)).first
 
       json(201, {
         article: Decorators::Article.new(article),

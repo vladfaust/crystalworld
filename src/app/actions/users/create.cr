@@ -29,7 +29,7 @@ module Actions::Users
       )
 
       halt!(422, "Invalid user: #{user.errors}") unless user.valid?
-      repo.insert(user)
+      user = repo.insert(user)
 
       token = Authentication::JWT::Tokenizer.new(user).tokenize
 
