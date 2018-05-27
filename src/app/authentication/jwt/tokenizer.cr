@@ -16,7 +16,7 @@ module Authentication::JWT
         "sub"  => subject,
         "exp"  => (Time.now + EXPIRATION).epoch,
         "user" => {
-          "id" => @user.id,
+          "id" => @user.id.not_nil!,
         },
       }
 
