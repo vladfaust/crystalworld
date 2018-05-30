@@ -21,20 +21,20 @@ Crystal World relies on [Prism web framework](https://github.com/vladfaust/prism
 
 ## Installation
 
-First of all, you'll need to [install Crystal Programming Language](https://crystal-lang.org/docs/installation/). Then clone this repository with
+Clone this repository with
 
 ```shell
 git clone https://github.com/vladfaust/crystalworld.git && cd crystalworld
 ```
 
-To run Crystal World, you'll need PostgreSQL installed and running. Write down its access url (e.g. `postgres://postgres:postgres@localhost:5432/crystalworld`), it will be used as `DATABASE_URL` environment variable.
+You'll need to [install Crystal Programming Language](https://crystal-lang.org/docs/installation/) for non-docker based installation. You'll also need PostgreSQL installed and running. Write down its access url (e.g. `postgres://postgres:postgres@localhost:5432/crystalworld`), it will be used as `DATABASE_URL` environment variable.
 
 Crystal is a compiled language. It has different compilation modes, e.g. development and production. Production code is faster and packed into a single binary, however it builds slightly longer. Therefore, there are multiple ways to proceed:
 
 ### Production build from the source code
 
-1. Build the app: `shards build --production --release --no-debug`
-2. Set env vars: `export DATABASE_URL="" JWT_SECRET_KEY=""`
+1. Set env vars: `export APP_ENV=production DATABASE_URL="" JWT_SECRET_KEY=""`
+2. Build the app: `shards build --production --release --no-debug`
 3. Apply migrations: `./bin/cake db:migrate`
 4. Launch the server: `./bin/server`
 
