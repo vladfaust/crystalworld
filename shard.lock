@@ -6,7 +6,7 @@ shards:
 
   core:
     github: vladfaust/core.cr
-    commit: f59b6b9f24e041a9b63e1a4178133d5b83a1e8fa
+    commit: b8a0603cebd3c93b2c83e55a9f9fcd04dfc38b5d
 
   db:
     github: crystal-lang/crystal-db
@@ -30,7 +30,7 @@ shards:
 
   prism:
     github: vladfaust/prism
-    commit: 247d4d6951561eeba136efc394641f4c16cc95f6
+    commit: a8ab86f91a3c954cf466b5fc2e6b6b09ebe517a8
 
   radix:
     github: luislavena/radix

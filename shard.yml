@@ -28,10 +28,10 @@ dependencies:
     tag: v0.2.0-pre.1
   core:
     github: vladfaust/core.cr
-    tag: v0.4.0-rc.2
+    tag: v0.4.0-rc.3
   prism:
     github: vladfaust/prism
-    tag: v0.2.0-rc.4
+    tag: v0.2.0-rc.5
   jwt:
     github: crystal-community/jwt
     version: ~> 0.2.2
