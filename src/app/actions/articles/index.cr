@@ -21,7 +21,7 @@ module Actions::Articles
         )
       elsif params[:tag]
         articles = repo.query(Article
-          .where("? = ANY(tags)", {params[:tag]})
+          .where("tags @> ARRAY[?]::text[]", {params[:tag]})
           .join(:author, select: [:username])
         )
       elsif params[:favorited]
