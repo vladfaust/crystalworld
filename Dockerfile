@@ -1,4 +1,4 @@
-FROM crystallang/crystal:0.24.2
+FROM crystallang/crystal:0.25.0
 
 # Add the app and build it
 WORKDIR /app/
