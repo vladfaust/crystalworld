@@ -21,7 +21,8 @@ handlers = [log_handler, auth_handler, router] # Let's just put them all in one 
 host = ENV["HOST"]? || "0.0.0.0"       # Get HOST environment variable or use "0.0.0.0" by default
 port = ENV["PORT"]?.try &.to_i || 5000 # ditto
 
-server = Prism::Server.new(host, port, handlers, logger)
+# *true* argument enables multi-process usage of a same port
+server = Prism::Server.new(handlers, host, port, true, logger)
 
 logger.info("Welcome to the Crystal World! ✨ https://github.com/vladfaust/crystalworld")
-server.listen(true) # *true* argument enables multi-process usage of a same port
+server.listen

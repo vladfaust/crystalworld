@@ -5,8 +5,8 @@ shards:
     version: 0.2.1
 
   core:
-    github: vladfaust/core.cr
-    commit: b8a0603cebd3c93b2c83e55a9f9fcd04dfc38b5d
+    github: vladfaust/core
+    version: 0.4.0
 
   db:
     github: crystal-lang/crystal-db
@@ -18,19 +18,19 @@ shards:
 
   jwt:
     github: crystal-community/jwt
-    version: 0.2.2
+    version: 0.3.0
 
   migrate:
     github: vladfaust/migrate.cr
-    commit: 329b0240a1e5b2e893ce8fcbb950b01d55f94e19
+    version: 0.2.0
 
   pg:
     github: will/crystal-pg
-    version: 0.14.1
+    version: 0.15.0
 
   prism:
     github: vladfaust/prism
-    commit: a8ab86f91a3c954cf466b5fc2e6b6b09ebe517a8
+    version: 0.2.1
 
   radix:
     github: luislavena/radix

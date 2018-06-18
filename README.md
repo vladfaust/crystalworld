@@ -15,7 +15,7 @@ This project is aimed to demonstrate how easy and enjoyable it is to develop a h
 * 💎 **Beauty** inherited from Ruby
 * 🔒 **Type system** with smart compilator
 
-Crystal World relies on [Prism web framework](https://github.com/vladfaust/prism) and [Core ORM](https://github.com/vladfaust/core.cr) as its foundation. The database chosen is PostgreSQL. Go ahead and read the source code, you'll find it delightfully simple and understandeable! 🍰
+Crystal World relies on [Prism web framework](https://github.com/vladfaust/prism) and [Core ORM](https://github.com/vladfaust/core) as its foundation. The database chosen is PostgreSQL. Go ahead and read the source code, you'll find it delightfully simple and understandeable! 🍰
 
 *Note that although Crystal itself is not officially released yet, it's already being used in many real-world (including business) applications.*
 

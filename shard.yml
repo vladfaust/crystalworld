@@ -10,7 +10,7 @@ targets:
   cake:
     main: src/bin/cake.cr
 
-crystal: 0.24.2
+crystal: 0.25.0
 
 license: MIT
 
@@ -22,19 +22,19 @@ development_dependencies:
 dependencies:
   pg:
     github: will/crystal-pg
-    version: ~> 0.14.1
+    version: ~> 0.15.0
   migrate:
     github: vladfaust/migrate.cr
-    tag: v0.2.0-pre.1
+    version: ~> 0.2.0
   core:
-    github: vladfaust/core.cr
-    tag: v0.4.0-rc.3
+    github: vladfaust/core
+    version: ~> 0.4.0
   prism:
     github: vladfaust/prism
-    tag: v0.2.0-rc.5
+    version: ~> 0.2.0
   jwt:
     github: crystal-community/jwt
-    version: ~> 0.2.2
+    version: ~> 0.3.0
   cake-bake:
     github: vladfaust/cake-bake.cr
     version: ~> 0.2.0
