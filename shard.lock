@@ -6,7 +6,7 @@ shards:
 
   core:
     github: vladfaust/core
-    version: 0.4.0
+    version: 0.4.1
 
   db:
     github: crystal-lang/crystal-db
@@ -22,7 +22,7 @@ shards:
 
   migrate:
     github: vladfaust/migrate.cr
-    version: 0.2.0
+    version: 0.3.0
 
   pg:
     github: will/crystal-pg
@@ -30,7 +30,7 @@ shards:
 
   prism:
     github: vladfaust/prism
-    version: 0.2.1
+    version: 0.3.0
 
   radix:
     github: luislavena/radix

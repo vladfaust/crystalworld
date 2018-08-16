@@ -1,5 +1,5 @@
 name: crystalworld
-version: 0.1.0
+version: 0.2.0
 
 authors:
   - Vlad Faust <mail@vladfaust.com>
@@ -10,7 +10,7 @@ targets:
   cake:
     main: src/bin/cake.cr
 
-crystal: 0.25.0
+crystal: 0.26.0
 
 license: MIT
 
@@ -25,13 +25,13 @@ dependencies:
     version: ~> 0.15.0
   migrate:
     github: vladfaust/migrate.cr
-    version: ~> 0.2.0
+    version: ~> 0.3.0
   core:
     github: vladfaust/core
-    version: ~> 0.4.0
+    version: ~> 0.4.1
   prism:
     github: vladfaust/prism
-    version: ~> 0.2.0
+    version: ~> 0.3.0
   jwt:
     github: crystal-community/jwt
     version: ~> 0.3.0
