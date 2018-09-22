@@ -4,8 +4,11 @@
 [![Build status](https://img.shields.io/travis/vladfaust/crystalworld/master.svg?style=flat-square)](https://travis-ci.org/vladfaust/crystalworld)
 [![Awesome](https://github.com/vladfaust/awesome/blob/badge-flat-alternative/media/badge-flat-alternative.svg)](https://github.com/veelenga/awesome-crystal)
 [![vladfaust.com](https://img.shields.io/badge/style-.com-lightgrey.svg?longCache=true&style=flat-square&label=vladfaust&colorB=0a83d8)](https://vladfaust.com)
+[![Patrons count](https://img.shields.io/badge/dynamic/json.svg?label=patrons&url=https://www.patreon.com/api/user/11296360&query=$.included[0].attributes.patron_count&style=flat-square&colorB=red&maxAge=86400)](https://www.patreon.com/vladfaust)
 
 Welcome to the Crystal World, a [RealWorld back-end API](https://realworld.io) application implemented in [Crystal](https://crystal-lang.org)!
+
+[![Become Patron](https://vladfaust.com/img/patreon-small.svg)](https://www.patreon.com/vladfaust)
 
 ## About
 
