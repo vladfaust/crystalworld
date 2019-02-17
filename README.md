@@ -23,8 +23,8 @@ Crystal World relies on [Onyx framework](https://github.com/onyxframework) as it
 
 Clone this repository with
 
-```shell
-git clone https://github.com/vladfaust/crystalworld.git && cd crystalworld
+```sh
+> git clone https://github.com/vladfaust/crystalworld.git && cd crystalworld
 ```
 
 Crystal is a compiled language. It has different compilation modes, e.g. development and production. Production code is faster and packed into a single binary, however its builds take more time. Therefore, there are multiple ways to proceed:
