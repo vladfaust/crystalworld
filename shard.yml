@@ -1,5 +1,5 @@
 name: crystalworld
-version: 0.2.0
+version: 0.3.0
 
 authors:
   - Vlad Faust <mail@vladfaust.com>
@@ -10,31 +10,29 @@ targets:
   cake:
     main: src/bin/cake.cr
 
-crystal: 0.26.0
+crystal: 0.27.2
 
 license: MIT
 
-development_dependencies:
-  dotenv:
-    github: gdotdesign/cr-dotenv
-    version: ~> 0.1.0
-
 dependencies:
-  pg:
-    github: will/crystal-pg
-    version: ~> 0.15.0
+  sqlite3:
+    github: crystal-lang/crystal-sqlite3
+    version: ~> 0.10.0
   migrate:
     github: vladfaust/migrate.cr
-    version: ~> 0.3.0
-  core:
-    github: vladfaust/core
     version: ~> 0.4.1
-  prism:
-    github: vladfaust/prism
-    version: ~> 0.3.0
+  onyx:
+    github: onyxframework/onyx
+    version: ~> 0.1.0
+  onyx-rest:
+    github: onyxframework/rest
+    version: ~> 0.6.0
+  onyx-sql:
+    github: onyxframework/sql
+    version: ~> 0.6.0
   jwt:
     github: crystal-community/jwt
-    version: ~> 0.3.0
+    version: ~> 0.4.0
   cake-bake:
     github: vladfaust/cake-bake.cr
     version: ~> 0.2.0

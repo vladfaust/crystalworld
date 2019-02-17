@@ -1,15 +1,25 @@
-require "pg"
+require "sqlite3"
 require "migrate"
-require "./src/env"
-require "./src/services/logger"
-
-Services::Logger.init(Logger::INFO)
+require "onyx/env"
+require "onyx/db"
+require "onyx/logger"
 
 desc "Migrate database to the latest version"
 task :dbmigrate do
   migrator = Migrate::Migrator.new(
-    DB.open(ENV["DATABASE_URL"]),
-    logger
+    Onyx.db,
+    Onyx.logger
   )
+
   migrator.to_latest
+end
+
+desc "Reset database to zero and then to the latest version"
+task :dbredo do
+  migrator = Migrate::Migrator.new(
+    Onyx.db,
+    Onyx.logger
+  )
+
+  migrator.redo
 end

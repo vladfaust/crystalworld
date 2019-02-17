@@ -1,29 +1,44 @@
-require "prism"
+require "onyx/env"
+require "onyx/rest"
 
-require "../env"
-require "../services/logger"
-require "../services/repo"
-require "../app/authentication/handler"
-require "../app/router"
+require "sqlite3"
+require "onyx/sql"
 
-# Initialize applicaiton services
-Services::Logger.init(ENV["APP_ENV"] == "production" ? Logger::INFO : Logger::DEBUG)
-Services::Repository.init(ENV["DATABASE_URL"], logger)
+require "../models"
+require "../views"
+require "../actions"
 
-# Create handlers which will process an HTTP request sequentially
-log_handler = Prism::LogHandler.new(logger) # Logs requests
-cors = Prism::CORS.new(allow_headers: %w(accept content-type authorization))
-auth_handler = Authentication::Handler.new        # Handles JWT authentication
-cacher = Prism::Router::SimpleCacher.new(100_000) # Caches routing, increasing its performance
-router = Router.new(cacher)
+Onyx.draw do
+  get "/" { } # Just a 200 response
 
-handlers = [log_handler, cors, auth_handler, router] # Let's just put them all in one array
+  post "/users", Actions::Users::Create
+  put "/user", Actions::Users::Update
+  post "/users/login", Actions::Users::Login
+  get "/user", Actions::Users::Get
 
-host = ENV["HOST"]? || "0.0.0.0"       # Get HOST environment variable or use "0.0.0.0" by default
-port = ENV["PORT"]?.try &.to_i || 5000 # ditto
+  post "/articles", Actions::Articles::Create
+  put "/articles/:slug", Actions::Articles::Update
+  delete "/articles/:slug", Actions::Articles::Delete
+  get "/articles/feed", Actions::Articles::Feed
+  get "/articles", Actions::Articles::Index
+  get "/articles/:slug", Actions::Articles::Get
 
-server = Prism::Server.new(handlers, logger)
-server.bind_tcp(host, port, reuse_port: true) # `reuse_port` enables multi-process usage of the same port
+  post "/articles/:slug/favorite", Actions::Articles::Favorites::Create
+  delete "/articles/:slug/favorite", Actions::Articles::Favorites::Delete
 
-logger.info("Welcome to the Crystal World! ✨ https://github.com/vladfaust/crystalworld")
-server.listen
+  post "/articles/:slug/comments", Actions::Articles::Comments::Create
+  delete "/articles/:slug/comments/:id", Actions::Articles::Comments::Delete
+  get "/articles/:slug/comments", Actions::Articles::Comments::Index
+
+  get "/profiles/:username", Actions::Profiles::Get
+  post "/profiles/:username/follow", Actions::Profiles::Follows::Create
+  delete "/profiles/:username/follow", Actions::Profiles::Follows::Delete
+
+  get "/tags", Actions::Tags::Index
+end
+
+Onyx.logger.info("Welcome to the " + "Crystal World!".colorize.mode(:bold).to_s + " © Vlad Faust <mail@vladfaust.com>")
+Onyx.logger.info("For updates visit " + "https://github.com/vladfaust/crystalworld".colorize(:light_gray).to_s)
+
+Onyx.render(:json)
+Onyx.listen
