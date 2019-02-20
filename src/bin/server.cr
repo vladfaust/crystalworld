@@ -40,5 +40,8 @@ end
 Onyx.logger.info("Welcome to the " + "Crystal World!".colorize.mode(:bold).to_s + " © Vlad Faust <mail@vladfaust.com>")
 Onyx.logger.info("For updates visit " + "https://github.com/vladfaust/crystalworld".colorize(:light_gray).to_s)
 
-Onyx.render(:json)
-Onyx.listen
+Onyx.render :json
+
+Onyx.listen(
+  host: ENV.fetch("ONYX_HOST", default: "0.0.0.0"),
+  port: ENV.fetch("ONYX_PORT", default: 5000).to_i)

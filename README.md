@@ -29,25 +29,30 @@ Clone this repository with
 
 Crystal is a compiled language. It has different compilation modes, e.g. development and production. Production code is faster and packed into a single binary, however its builds take more time. Therefore, there are multiple ways to proceed:
 
-### Production build with Docker
+### Production build with Docker-compose
 
-1. Build an image:
+1. Edit the `docker-compose.yml` file if you want to specify a JWT key, or a
+   custom database location. For example:
 
-```sh
-> docker build -t crystalworld:latest .
+```yaml
+version: '3.5'
+
+services:
+  crystalworld:
+    build: .
+    volumes: [ 'crystalworld_db:/app/crystalworld.db' ]
+    environment:
+      DATABASE_URL: sqlite3://./crystalworld.db
+      JWT_SECRET_KEY: 4bd43eaef50cc962865082160fcd5a96
+    ports:
+      - 5000:5000
+
+volumes:
+  crystalworld_db:
 ```
-2. Apply migrations:
 
-```sh
-> docker run -e DATABASE_URL="sqlite3://./crystalworld.db" crystalworld bin/cake db:migrate
-```
-
-3. Launch the server
-
-```sh
-> docker run -p 5000:5000 -e DATABASE_URL="sqlite3://./crystalworld.db" \
--e JWT_SECRET_KEY="63a051d73d71c997d38946f82e708301" crystalworld
-```
+2. Run `docker-compose up -d --build && docker-compose logs -f` to deploy and
+   watch the logs.
 
 ### Production build from the source code
 
