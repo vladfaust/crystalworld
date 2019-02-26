@@ -7,7 +7,7 @@ module Actions::Articles
     auth!
 
     params do
-      json do
+      json require: true do
         type article do
           type title : String
           type description : String?
@@ -18,17 +18,13 @@ module Actions::Articles
     end
 
     errors do
-      type JSONRequestExpected(400)
-
       type SlugAlreadyExists(422), slug : String do
         super("Article already exists with slug #{slug}")
       end
     end
 
     def call
-      raise JSONRequestExpected.new unless json = params.json
-
-      slug = json.article.title.downcase.gsub(' ', '-').gsub(/[^\w-]/, "")
+      slug = params.json.article.title.downcase.gsub(' ', '-').gsub(/[^\w-]/, "")
 
       if Onyx.query(Article.where(slug: slug).select(:id)).any?
         raise SlugAlreadyExists.new(slug)
@@ -36,7 +32,7 @@ module Actions::Articles
 
       tags = Array(Tag).new
 
-      json.article.tag_list.each do |tag|
+      params.json.article.tag_list.each do |tag|
         existing_tag? = Onyx.query(Tag.where(content: tag).select(:id)).first?
 
         if existing_tag = existing_tag?
@@ -50,9 +46,9 @@ module Actions::Articles
       article = Article.new(
         author: auth.user,
         slug: slug,
-        title: json.article.title,
-        description: json.article.description,
-        body: json.article.body,
+        title: params.json.article.title,
+        description: params.json.article.description,
+        body: params.json.article.body,
         tags: tags,
       )
 

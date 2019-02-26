@@ -38,7 +38,7 @@ shards:
 
   onyx-rest:
     github: onyxframework/rest
-    version: 0.6.5
+    version: 0.6.4
 
   onyx-sql:
     github: onyxframework/sql

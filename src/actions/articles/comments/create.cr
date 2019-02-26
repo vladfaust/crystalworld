@@ -10,7 +10,7 @@ module Actions::Articles::Comments
         type slug : String
       end
 
-      json do
+      json require: true do
         type comment do
           type body : String
         end
@@ -18,20 +18,17 @@ module Actions::Articles::Comments
     end
 
     errors do
-      type JSONRequestExpected(400)
       type ArticleNotFound(404)
     end
 
     def call
-      raise JSONRequestExpected.new unless json = params.json
-
       article = Onyx.query(Article.one.where(slug: params.path.slug).select(:id)).first?
       raise ArticleNotFound.new unless article
 
       comment = Comment.new(
         article: article,
         author: auth.user,
-        body: json.comment.body
+        body: params.json.comment.body
       )
 
       cursor = Onyx.exec(comment.insert)

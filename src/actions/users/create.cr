@@ -6,7 +6,7 @@ module Actions::Users
     include Auth
 
     params do
-      json do
+      json require: true do
         type user do
           type email : String
           type password : String
@@ -18,25 +18,22 @@ module Actions::Users
     end
 
     errors do
-      type JSONRequestExpected(400)
       type UserAlreadyExists(422)
     end
 
     def call
-      raise JSONRequestExpected.new unless json = params.json
-
       existing_user = Onyx.query(User
         .select(:id)
-        .where(email: json.user.email)
-        .or(username: json.user.username)
+        .where(email: params.json.user.email)
+        .or(username: params.json.user.username)
       ).first?
       raise UserAlreadyExists.new if existing_user
 
-      encrypted_password = Crypto::Bcrypt::Password.create(json.user.password)
+      encrypted_password = Crypto::Bcrypt::Password.create(params.json.user.password)
 
       user = User.new(
-        email: json.user.email,
-        username: json.user.username,
+        email: params.json.user.email,
+        username: params.json.user.username,
         encrypted_password: encrypted_password.to_s,
       )
 

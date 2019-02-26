@@ -11,7 +11,7 @@ module Actions::Articles
         type slug : String
       end
 
-      json do
+      json require: true do
         type article do
           type description : String?
           type body : String?
@@ -21,8 +21,6 @@ module Actions::Articles
     end
 
     errors do
-      type JSONRequestExpected(400)
-
       type NoParametersToUpdate(400) do
         super("At least one parameter to update is required")
       end
@@ -32,9 +30,7 @@ module Actions::Articles
     end
 
     def call
-      raise JSONRequestExpected.new unless json = params.json
-
-      if {{ %w(description body tags).map { |a| "json.article.#{a.id}.nil?" }.join(" && ").id }}
+      if {{ %w(description body tags).map { |a| "params.json.article.#{a.id}.nil?" }.join(" && ").id }}
         raise NoParametersToUpdate.new
       end
 
@@ -53,13 +49,13 @@ module Actions::Articles
 
       {% begin %}
         {% for attr in %w(description body) %}
-          if param = json.article.{{attr.id}}
+          if param = params.json.article.{{attr.id}}
             changeset.update({{attr.id}}: param)
           end
         {% end %}
       {% end %}
 
-      if param_tags = json.article.tags
+      if param_tags = params.json.article.tags
         tags = Array(Tag).new
 
         param_tags.each do |tag|
