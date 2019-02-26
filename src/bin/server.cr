@@ -41,4 +41,7 @@ Onyx.logger.info("Welcome to the " + "Crystal World!".colorize.mode(:bold).to_s 
 Onyx.logger.info("For updates visit " + "https://github.com/vladfaust/crystalworld".colorize(:light_gray).to_s)
 
 Onyx.render(:json)
-Onyx.listen
+Onyx.listen(
+  host: ENV["HOST"]? || "0.0.0.0",
+  port: ENV["PORT"]?.try(&.to_i) || 5000
+)
