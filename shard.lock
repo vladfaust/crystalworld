@@ -42,7 +42,7 @@ shards:
 
   onyx-sql:
     github: onyxframework/sql
-    version: 0.6.2
+    commit: 401f65dd7cd11a7ebe9b378198554b3b3439fd29
 
   radix:
     github: luislavena/radix

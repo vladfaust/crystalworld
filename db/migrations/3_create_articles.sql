@@ -1,8 +1,8 @@
 -- +migrate up
 CREATE TABLE articles (
   -- References
-  author_id INT   REFERENCES users(rowid),
-  tag_ids   TEXT, -- In SQLite, there are no arrays
+  author_id INT   NOT NULL  REFERENCES users(rowid),
+  tag_ids   TEXT  NOT NULL, -- In SQLite, there are no arrays
 
   -- Fields
   slug        VARCHAR(64) NOT NULL,

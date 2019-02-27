@@ -25,7 +25,7 @@ module Actions::Articles
 
           .join(author: true) do |q|
             q.select(:username)
-            q.where(username: params.query.author)
+            q.where(username: params.query.author.not_nil!)
           end
         )
       elsif params.query.tag
@@ -35,7 +35,7 @@ module Actions::Articles
           .offset(params.query.offset)
 
           .join(tags: true, on: "") do |q|
-            q.where(content: params.query.tag)
+            q.where(content: params.query.tag.not_nil!)
           end
 
           .join(author: true) do |q|
@@ -54,7 +54,7 @@ module Actions::Articles
 
           .join(favorites: true) do |q|
             q.join(user: true) do |q|
-              q.where(username: params.query.favorited)
+              q.where(username: params.query.favorited.not_nil!)
             end
           end
         )

@@ -12,10 +12,10 @@ module Views
           start_object
         end
 
-        field "email", @user.email?.to_s
-        field "username", @user.username?.to_s
-        field "bio", @user.bio?.to_s
-        field "image", @user.image?.to_s
+        field "email", @user.email.to_s
+        field "username", @user.username.to_s
+        field "bio", @user.bio.to_s
+        field "image", @user.image.to_s
 
         if @token
           field "token", @token

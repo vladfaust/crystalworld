@@ -4,13 +4,13 @@ class User
   schema users do
     pkey id : Int32, key: "rowid", converter: SQLite3::Any(Int32)
 
-    type email : String
-    type encrypted_password : String, key: "password"
-    type username : String
+    type email : String, not_null: true
+    type encrypted_password : String, key: "password", not_null: true
+    type username : String, not_null: true
     type bio : String
     type image : String
 
-    type created_at : Time, default: true
+    type created_at : Time, default: true, not_null: true
     type updated_at : Time, default: true
 
     type articles : Array(Article), foreign_key: "author_id"

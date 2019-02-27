@@ -8,8 +8,8 @@ module Views
     json({
       profile: {
         username:  @profile.username,
-        bio:       @profile.bio?.to_s,
-        image:     @profile.image?.to_s,
+        bio:       @profile.bio.to_s,
+        image:     @profile.image.to_s,
         following: @following,
       },
     })

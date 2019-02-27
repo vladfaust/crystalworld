@@ -1,8 +1,8 @@
 -- +migrate up
 CREATE TABLE follows (
   -- References
-  follower_id INT REFERENCES users(rowid),
-  followee_id INT REFERENCES users(rowid),
+  follower_id INT NOT NULL  REFERENCES users(rowid),
+  followee_id INT NOT NULL  REFERENCES users(rowid),
 
   -- Timestamps
   created_at  TEXT  NOT NULL  DEFAULT (STRFTIME('%Y-%m-%d %H:%M:%f', 'now'))

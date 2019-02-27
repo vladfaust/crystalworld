@@ -1,8 +1,8 @@
 -- +migrate up
 CREATE TABLE favorites (
   -- References
-  article_id  INT REFERENCES articles(rowid)  ON DELETE CASCADE,
-  user_id     INT REFERENCES users(rowid),
+  article_id  INT NOT NULL  REFERENCES articles(rowid)  ON DELETE CASCADE,
+  user_id     INT NOT NULL  REFERENCES users(rowid),
 
   -- Timestamps
   created_at  TEXT  NOT NULL  DEFAULT (STRFTIME('%Y-%m-%d %H:%M:%f', 'now'))

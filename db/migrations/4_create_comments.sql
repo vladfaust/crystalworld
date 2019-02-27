@@ -1,8 +1,8 @@
 -- +migrate up
 CREATE TABLE comments (
   -- References
-  author_id   INT REFERENCES users(rowid),
-  article_id  INT REFERENCES articles(rowid)  ON DELETE CASCADE,
+  author_id   INT NOT NULL  REFERENCES users(rowid),
+  article_id  INT NOT NULL  REFERENCES articles(rowid)  ON DELETE CASCADE,
 
   -- Fields
   body  TEXT  NOT NULL,
