@@ -11,9 +11,9 @@ class Article
     type description : String
     type body : String, not_null: true
 
-    type agg_favorites_count : Int32, default: true, not_null: true
+    type agg_favorites_count : Int32, not_null: true, default: true
 
-    type created_at : Time, default: true, not_null: true
+    type created_at : Time, not_null: true, default: true
     type updated_at : Time, default: true
 
     type tags : Array(Tag), key: "tag_ids", not_null: true

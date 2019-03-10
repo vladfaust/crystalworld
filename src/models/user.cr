@@ -10,7 +10,7 @@ class User
     type bio : String
     type image : String
 
-    type created_at : Time, default: true, not_null: true
+    type created_at : Time, not_null: true, default: true
     type updated_at : Time, default: true
 
     type articles : Array(Article), foreign_key: "author_id"

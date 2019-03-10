@@ -1,6 +1,6 @@
 module Views
   struct User
-    include Onyx::REST::View
+    include Onyx::HTTP::View
 
     def initialize(@user : ::User, *, @token : String? = nil, @nested = false)
     end

@@ -1,6 +1,6 @@
 module Views
   struct Comment
-    include Onyx::REST::View
+    include Onyx::HTTP::View
 
     def initialize(@comment : ::Comment, @nested = false)
     end
@@ -14,9 +14,9 @@ module Views
 
         field "id", @comment.id
         field "body", @comment.body
-        field "createdAt", @comment.created_at.to_s(TIME_FORMAT)
+        field "createdAt", @comment.created_at.try &.to_s(TIME_FORMAT)
         field "updatedAt", @comment.updated_at.try &.to_s(TIME_FORMAT)
-        field "author", @comment.author.username
+        field "author", @comment.author.try &.username
 
         unless @nested
           end_object
