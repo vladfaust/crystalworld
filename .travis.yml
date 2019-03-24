@@ -2,15 +2,20 @@ language: crystal
 jobs:
   include:
     - stage: Continious integration
-      name: Run Crystal specs
+      name: Crystal specs
+      before_install:
+        - nvm install 9
+        - npm install js-yaml shelljs
+        - node .travis/inject-dependencies.js
       script:
         - crystal spec
-    - name: Run integration tests
+    - name: Integration tests
       env: DATABASE_URL=sqlite3://./crystalworld.sqlite3 JWT_SECRET_KEY=63a051d73d71c997d38946f82e708301 HOST=localhost PORT=5000
-      before_script:
+      before_install:
         - nvm install 9
-        - nvm use 9
+        - npm install js-yaml shelljs
         - npm install -g npx
+        - node .travis/inject-dependencies.js
       script:
         - crystal build src/bin/cake.cr -o cake
         - crystal build src/bin/server.cr -o server
