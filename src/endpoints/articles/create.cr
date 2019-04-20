@@ -26,20 +26,20 @@ module Endpoints::Articles
     def call
       slug = params.json.article.title.downcase.gsub(' ', '-').gsub(/[^\w-]/, "")
 
-      if Onyx.query(Article.where(slug: slug).select(:id)).any?
+      if Onyx::SQL.query(Article.where(slug: slug).select(:id)).any?
         raise SlugAlreadyExists.new(slug)
       end
 
       tags = Array(Tag).new
 
       params.json.article.tag_list.each do |tag|
-        existing_tag? = Onyx.query(Tag.where(content: tag).select(:id)).first?
+        existing_tag? = Onyx::SQL.query(Tag.where(content: tag).select(:id)).first?
 
         if existing_tag = existing_tag?
           next tags << existing_tag
         end
 
-        cursor = Onyx.exec(Tag.new(content: tag).insert)
+        cursor = Onyx::SQL.exec(Tag.new(content: tag).insert)
         tags << Tag.new(id: cursor.last_insert_id.to_i)
       end
 
@@ -52,9 +52,9 @@ module Endpoints::Articles
         tags: tags,
       )
 
-      cursor = Onyx.exec(article.insert)
+      cursor = Onyx::SQL.exec(article.insert)
 
-      article = Onyx.query(Article
+      article = Onyx::SQL.query(Article
         .where(id: cursor.last_insert_id.to_i)
         .select(Article, :id)
         .join(author: true) do |q|

@@ -22,7 +22,7 @@ module Endpoints::Articles::Comments
     end
 
     def call
-      article = Onyx.query(Article.one.where(slug: params.path.slug).select(:id)).first?
+      article = Onyx::SQL.query(Article.one.where(slug: params.path.slug).select(:id)).first?
       raise ArticleNotFound.new unless article
 
       comment = Comment.new(
@@ -31,9 +31,9 @@ module Endpoints::Articles::Comments
         body: params.json.comment.body
       )
 
-      cursor = Onyx.exec(comment.insert)
+      cursor = Onyx::SQL.exec(comment.insert)
 
-      comment = Onyx.query(Comment
+      comment = Onyx::SQL.query(Comment
         .where(id: cursor.last_insert_id.to_i)
         .select(Comment, :id)
         .join(author: true) do |q|

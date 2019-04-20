@@ -18,7 +18,7 @@ module Endpoints::Articles::Favorites
     end
 
     def call
-      article = Onyx.query(Article
+      article = Onyx::SQL.query(Article
         .select(Article, :id)
         .where(slug: params.path.slug)
         .join(author: true) do |q|
@@ -28,7 +28,7 @@ module Endpoints::Articles::Favorites
       raise ArticleNotFound.new unless article
 
       begin
-        Onyx.exec(Favorite.insert(article: article, user: auth.user))
+        Onyx::SQL.exec(Favorite.insert(article: article, user: auth.user))
       rescue ex : SQLite3::Exception
         case ex.message
         when /UNIQUE constraint failed/
@@ -43,7 +43,7 @@ module Endpoints::Articles::Favorites
       article.apply(changeset)
 
       # TODO: Make it async
-      Onyx.exec(article.update(changeset))
+      Onyx::SQL.exec(article.update(changeset))
       preload_articles_tags({article})
 
       status(201)

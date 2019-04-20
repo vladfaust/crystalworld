@@ -16,12 +16,12 @@ module Endpoints::Articles
     end
 
     def call
-      article = Onyx.query(Article.where(slug: params.path.slug).select(:author, :id)).first?
+      article = Onyx::SQL.query(Article.where(slug: params.path.slug).select(:author, :id)).first?
 
       raise ArticleNotFound.new unless article
       raise Forbidden.new unless article.author == auth.user
 
-      Onyx.exec(article.delete)
+      Onyx::SQL.exec(article.delete)
       status(202)
     end
   end

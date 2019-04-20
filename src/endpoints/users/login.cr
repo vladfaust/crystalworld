@@ -21,7 +21,7 @@ module Endpoints::Users
     end
 
     def call
-      user = Onyx.query(User.where(email: params.json.user.email).select(User, :id)).first?
+      user = Onyx::SQL.query(User.where(email: params.json.user.email).select(User, :id)).first?
       raise UserNotFound.new unless user
 
       encrypted_password = Crypto::Bcrypt::Password.new(user.encrypted_password!)

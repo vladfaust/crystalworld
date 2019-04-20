@@ -18,7 +18,7 @@ module Endpoints::Articles::Favorites
     end
 
     def call
-      article = Onyx.query(Article
+      article = Onyx::SQL.query(Article
         .select(Article, :id)
         .where(slug: params.path.slug)
         .join(author: true) do |q|
@@ -27,7 +27,7 @@ module Endpoints::Articles::Favorites
       ).first?
       raise ArticleNotFound.new unless article
 
-      deleted = Onyx.exec(Favorite.delete.where(
+      deleted = Onyx::SQL.exec(Favorite.delete.where(
         user: auth.user,
         article: article,
       )).try &.rows_affected
@@ -38,7 +38,7 @@ module Endpoints::Articles::Favorites
       article.apply(changeset)
 
       # TODO: Make it async
-      Onyx.exec(article.update(changeset))
+      Onyx::SQL.exec(article.update(changeset))
       preload_articles_tags({article})
 
       status(202)

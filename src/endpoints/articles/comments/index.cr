@@ -13,10 +13,10 @@ module Endpoints::Articles::Comments
     end
 
     def call
-      article = Onyx.query(Article.where(slug: params.path.slug).select(:id)).first?
+      article = Onyx::SQL.query(Article.where(slug: params.path.slug).select(:id)).first?
       raise ArticleNotFound.new unless article
 
-      comments = Onyx.query(Comment
+      comments = Onyx::SQL.query(Comment
         .select(Comment, :id)
         .where(article: article)
         .join(author: true) do |q|

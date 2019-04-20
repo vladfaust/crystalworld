@@ -17,19 +17,19 @@ module Endpoints::Profiles::Follows
     end
 
     def call
-      profile = Onyx.query(User
+      profile = Onyx::SQL.query(User
         .select(:id, :username, :bio, :image)
         .where(username: params.path.username)
       ).first?
       raise ProfileNotFound.new unless profile
 
-      follow = Onyx.query(Follow
+      follow = Onyx::SQL.query(Follow
         .select(:id)
         .where(followee: profile, follower: auth.user)
       ).first?
       raise NotFollowing.new unless follow
 
-      Onyx.exec(follow.delete)
+      Onyx::SQL.exec(follow.delete)
 
       status(200)
       view(Views::Profile.new(profile, following: false))

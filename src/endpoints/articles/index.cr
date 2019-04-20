@@ -18,7 +18,7 @@ module Endpoints::Articles
       articles = uninitialized Array(Article)
 
       if params.query.author
-        articles = Onyx.query(Article
+        articles = Onyx::SQL.query(Article
           .select(Article, :id)
           .limit(params.query.limit)
           .offset(params.query.offset)
@@ -29,7 +29,7 @@ module Endpoints::Articles
           end
         )
       elsif params.query.tag
-        articles = Onyx.query(Article
+        articles = Onyx::SQL.query(Article
           .select(Article, :id)
           .limit(params.query.limit)
           .offset(params.query.offset)
@@ -43,7 +43,7 @@ module Endpoints::Articles
           end
         )
       elsif params.query.favorited
-        articles = Onyx.query(Article
+        articles = Onyx::SQL.query(Article
           .select(Article, :id)
           .limit(params.query.limit)
           .offset(params.query.offset)
@@ -59,7 +59,7 @@ module Endpoints::Articles
           end
         )
       else
-        articles = Onyx.query(Article
+        articles = Onyx::SQL.query(Article
           .select(Article, :id)
           .limit(params.query.limit)
           .offset(params.query.offset)
@@ -77,7 +77,7 @@ module Endpoints::Articles
       preload_articles_tags(articles)
 
       if auth?.try &.authed?
-        user_favorites = Onyx.query(Favorite
+        user_favorites = Onyx::SQL.query(Favorite
           .select(:article)
           .where(user: auth.user)
           .and("article_id IN (?)", articles.map(&.id).join(','))

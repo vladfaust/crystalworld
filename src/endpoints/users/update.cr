@@ -29,7 +29,7 @@ module Endpoints::Users
         raise NoParametersToUpdate.new
       end
 
-      user = Onyx.query(User.where(id: auth.user.id!).select(User, :id)).first
+      user = Onyx::SQL.query(User.where(id: auth.user.id!).select(User, :id)).first
       changeset = user.changeset
 
       {% begin %}
@@ -46,7 +46,7 @@ module Endpoints::Users
       changeset.update(updated_at: Time.now)
 
       begin
-        Onyx.exec(user.update(changeset))
+        Onyx::SQL.exec(user.update(changeset))
 
         status(204)
         view(Views::User.new(user, token: auth.token))

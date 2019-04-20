@@ -14,12 +14,12 @@ module Endpoints::Profiles
     end
 
     def call
-      profile = Onyx.query(User.where(username: params.path.username).select(User, :id)).first?
+      profile = Onyx::SQL.query(User.where(username: params.path.username).select(User, :id)).first?
       raise ProfileNotFound.new unless profile
 
       following = false
       if auth.user?
-        following = Onyx.query(Follow
+        following = Onyx::SQL.query(Follow
           .where(followee: profile, follower: auth.user)
           .select(:id)
         ).any?

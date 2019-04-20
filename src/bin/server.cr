@@ -8,39 +8,58 @@ require "../models"
 require "../views"
 require "../endpoints"
 
-Onyx.draw do
-  get "/" { } # Just a 200 response
+Onyx::HTTP.on do |r|
+  r.get "/" { } # Just a 200 response
 
-  post "/users", Endpoints::Users::Create
-  put "/user", Endpoints::Users::Update
-  post "/users/login", Endpoints::Users::Login
-  get "/user", Endpoints::Users::Get
+  r.on "/user" do
+    r.put "/", Endpoints::Users::Update
+    r.get "/", Endpoints::Users::Get
+  end
 
-  post "/articles", Endpoints::Articles::Create
-  put "/articles/:slug", Endpoints::Articles::Update
-  delete "/articles/:slug", Endpoints::Articles::Delete
-  get "/articles/feed", Endpoints::Articles::Feed
-  get "/articles", Endpoints::Articles::Index
-  get "/articles/:slug", Endpoints::Articles::Get
+  r.on "/users" do
+    r.post "/", Endpoints::Users::Create
+    r.post "/login", Endpoints::Users::Login
+  end
 
-  post "/articles/:slug/favorite", Endpoints::Articles::Favorites::Create
-  delete "/articles/:slug/favorite", Endpoints::Articles::Favorites::Delete
+  r.on "/articles" do
+    r.post "/", Endpoints::Articles::Create
+    r.get "/", Endpoints::Articles::Index
+    r.get "/feed", Endpoints::Articles::Feed
 
-  post "/articles/:slug/comments", Endpoints::Articles::Comments::Create
-  delete "/articles/:slug/comments/:id", Endpoints::Articles::Comments::Delete
-  get "/articles/:slug/comments", Endpoints::Articles::Comments::Index
+    r.on "/:slug" do
+      r.put "/", Endpoints::Articles::Update
+      r.delete "/", Endpoints::Articles::Delete
+      r.get "/", Endpoints::Articles::Get
 
-  get "/profiles/:username", Endpoints::Profiles::Get
-  post "/profiles/:username/follow", Endpoints::Profiles::Follows::Create
-  delete "/profiles/:username/follow", Endpoints::Profiles::Follows::Delete
+      r.on "/favorite" do
+        r.post "/", Endpoints::Articles::Favorites::Create
+        r.delete "/", Endpoints::Articles::Favorites::Delete
+      end
 
-  get "/tags", Endpoints::Tags::Index
+      r.on "/comments" do
+        r.post "/", Endpoints::Articles::Comments::Create
+        r.delete "/:id", Endpoints::Articles::Comments::Delete
+        r.get "/", Endpoints::Articles::Comments::Index
+      end
+    end
+  end
+
+  r.on "/profiles/:username" do
+    r.get "/", Endpoints::Profiles::Get
+
+    r.on "/follow" do
+      r.post "/", Endpoints::Profiles::Follows::Create
+      r.delete "/", Endpoints::Profiles::Follows::Delete
+    end
+  end
+
+  r.get "/tags", Endpoints::Tags::Index
 end
 
 Onyx.logger.info("Welcome to the " + "Crystal World!".colorize.mode(:bold).to_s + " © Vlad Faust <mail@vladfaust.com>")
 Onyx.logger.info("For updates visit " + "https://github.com/vladfaust/crystalworld".colorize(:light_gray).to_s)
 
-Onyx.listen(
+Onyx::HTTP.listen(
   host: ENV["HOST"]? || "0.0.0.0",
   port: ENV["PORT"]?.try(&.to_i) || 5000
 )

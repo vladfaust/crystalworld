@@ -34,7 +34,7 @@ module Endpoints::Articles
         raise NoParametersToUpdate.new
       end
 
-      article = Onyx.query(Article
+      article = Onyx::SQL.query(Article
         .select(Article, :id)
         .where(slug: params.path.slug)
         .join(author: true) do |q|
@@ -59,13 +59,13 @@ module Endpoints::Articles
         tags = Array(Tag).new
 
         param_tags.each do |tag|
-          existing_tag? = Onyx.query(Tag.where(content: tag).select(:id)).first?
+          existing_tag? = Onyx::SQL.query(Tag.where(content: tag).select(:id)).first?
 
           if existing_tag = existing_tag?
             next tags << existing_tag
           end
 
-          cursor = Onyx.exec(Tag.new(content: tag).insert)
+          cursor = Onyx::SQL.exec(Tag.new(content: tag).insert)
           tags << Tag.new(id: cursor.last_insert_id.to_i)
         end
 
@@ -81,11 +81,11 @@ module Endpoints::Articles
       # TODO: Make it async
       #
 
-      Onyx.exec(article.update(changeset))
+      Onyx::SQL.exec(article.update(changeset))
       preload_articles_tags({article})
 
       favorited = false
-      favorited = Onyx.query(Favorite
+      favorited = Onyx::SQL.query(Favorite
         .select(:id)
         .where(article: article, user: auth.user)
       ).any? if auth.authed?

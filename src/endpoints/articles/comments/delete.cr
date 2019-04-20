@@ -18,7 +18,7 @@ module Endpoints::Articles::Comments
     end
 
     def call
-      comment = Onyx.query(Comment
+      comment = Onyx::SQL.query(Comment
         .select(:id, :author)
         .where(id: params.path.id)
         .join(article: true) do |q|
@@ -30,7 +30,7 @@ module Endpoints::Articles::Comments
       raise Forbidden.new unless auth.user == comment.author
       raise CommentDoesNotBelongToThisArticle.new unless comment.article!.slug! == params.path.slug
 
-      Onyx.exec(comment.delete)
+      Onyx::SQL.exec(comment.delete)
       status(202)
     end
   end

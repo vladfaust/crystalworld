@@ -14,7 +14,7 @@ module Endpoints::Articles
     end
 
     def call
-      articles = Onyx.query(Article
+      articles = Onyx::SQL.query(Article
         .select(Article, :id)
         .limit(params.query.limit)
         .offset(params.query.offset)
@@ -31,7 +31,7 @@ module Endpoints::Articles
       favorites = {} of Int32 => Bool
 
       if articles.size > 0
-        Onyx.query(Favorite
+        Onyx::SQL.query(Favorite
           .select(:article, :id)
           .where(user: auth.user)
           .and("article_id IN (?)", articles.map(&.id).join(','))

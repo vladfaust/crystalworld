@@ -15,7 +15,7 @@ module Endpoints::Articles
     end
 
     def call
-      article = Onyx.query(Article
+      article = Onyx::SQL.query(Article
         .select(Article, :id)
         .where(slug: params.path.slug)
         .join(author: true) do |x|
@@ -30,7 +30,7 @@ module Endpoints::Articles
       preload_articles_tags({article})
 
       favorited = false
-      favorited = Onyx.query(Favorite
+      favorited = Onyx::SQL.query(Favorite
         .one
         .select(:id)
         .where(article: article, user: auth.user)

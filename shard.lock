@@ -38,15 +38,15 @@ shards:
 
   onyx:
     github: onyxframework/onyx
-    version: 0.3.0
+    version: 0.4.0
 
   onyx-http:
     github: onyxframework/http
-    version: 0.7.0
+    version: 0.8.0
 
   onyx-sql:
     github: onyxframework/sql
-    version: 0.7.0
+    version: 0.8.0
 
   radix:
     github: luislavena/radix
@@ -54,7 +54,7 @@ shards:
 
   sqlite3:
     github: crystal-lang/crystal-sqlite3
-    version: 0.10.0
+    version: 0.11.0
 
   time_format:
     github: vladfaust/time_format.cr

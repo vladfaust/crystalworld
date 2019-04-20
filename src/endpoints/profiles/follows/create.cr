@@ -17,14 +17,14 @@ module Endpoints::Profiles::Follows
     end
 
     def call
-      profile = Onyx.query(User
+      profile = Onyx::SQL.query(User
         .select(:id, :username, :bio, :image)
         .where(username: params.path.username)
       ).first?
       raise ProfileNotFound.new unless profile
 
       begin
-        Onyx.exec(Follow.insert(followee: profile, follower: auth.user))
+        Onyx::SQL.exec(Follow.insert(followee: profile, follower: auth.user))
       rescue ex : SQLite3::Exception
         case ex.message
         when /UNIQUE constraint failed/ then raise AlreadyFollowing.new

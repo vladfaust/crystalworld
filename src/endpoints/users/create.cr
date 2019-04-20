@@ -22,7 +22,7 @@ module Endpoints::Users
     end
 
     def call
-      existing_user = Onyx.query(User
+      existing_user = Onyx::SQL.query(User
         .select(:id)
         .where(email: params.json.user.email)
         .or(username: params.json.user.username)
@@ -37,7 +37,7 @@ module Endpoints::Users
         encrypted_password: encrypted_password.to_s,
       )
 
-      cursor = Onyx.exec(user.insert)
+      cursor = Onyx::SQL.exec(user.insert)
       user.id = cursor.last_insert_id.to_i
 
       token = jwtize(user)
