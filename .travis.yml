@@ -20,7 +20,7 @@ jobs:
       script:
         - crystal build src/bin/cake.cr -o cake
         - crystal build src/bin/server.cr -o server
-        - env DATABASE_URL=$DATABASE_URL ./cake db:migrate
-        - env DATABASE_URL=$DATABASE_URL JWT_SECRET_KEY=$JWT_SECRET_KEY HOST=$HOST PORT=$PORT ./server &
+        - ./cake db:migrate
+        - ./server &
         - git clone https://github.com/gothinkster/realworld.git && cd realworld/api
         - APIURL=http://localhost:5000 ./run-api-tests.sh
