@@ -38,15 +38,15 @@ shards:
 
   onyx:
     github: onyxframework/onyx
-    version: 0.4.0
+    version: 0.5.0
 
   onyx-http:
     github: onyxframework/http
-    version: 0.8.0
+    version: 0.8.2
 
   onyx-sql:
     github: onyxframework/sql
-    version: 0.8.0
+    version: 0.8.1
 
   radix:
     github: luislavena/radix

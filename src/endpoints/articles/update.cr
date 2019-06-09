@@ -59,9 +59,9 @@ module Endpoints::Articles
         tags = Array(Tag).new
 
         param_tags.each do |tag|
-          existing_tag? = Onyx::SQL.query(Tag.where(content: tag).select(:id)).first?
+          existing_tag = Onyx::SQL.query(Tag.where(content: tag).select(:id)).first?
 
-          if existing_tag = existing_tag?
+          if existing_tag
             next tags << existing_tag
           end
 
