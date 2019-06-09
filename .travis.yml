@@ -7,6 +7,7 @@ jobs:
         - nvm install 9
         - npm install js-yaml shelljs
         - node .travis/inject-dependencies.js
+      env: DATABASE_URL=sqlite3://./crystalworld.db JWT_SECRET_KEY=63a051d73d71c997d38946f82e708301
       script:
         - crystal spec
     - name: Integration tests
