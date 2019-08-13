@@ -10,7 +10,7 @@ shards:
 
   db:
     github: crystal-lang/crystal-db
-    version: 0.5.1
+    version: 0.6.0
 
   dotenv:
     github: gdotdesign/cr-dotenv
@@ -22,7 +22,7 @@ shards:
 
   http-params-serializable:
     github: vladfaust/http-params-serializable
-    version: 0.3.0
+    version: 0.4.0
 
   jwt:
     github: crystal-community/jwt
@@ -34,19 +34,19 @@ shards:
 
   migrate:
     github: vladfaust/migrate.cr
-    version: 0.4.1
+    version: 0.5.0
 
   onyx:
     github: onyxframework/onyx
-    version: 0.5.0
+    version: 0.6.1
 
   onyx-http:
     github: onyxframework/http
-    version: 0.8.2
+    version: 0.9.0
 
   onyx-sql:
     github: onyxframework/sql
-    version: 0.8.1
+    version: 0.9.0
 
   radix:
     github: luislavena/radix
@@ -54,7 +54,7 @@ shards:
 
   sqlite3:
     github: crystal-lang/crystal-sqlite3
-    version: 0.11.0
+    version: 0.13.0
 
   time_format:
     github: vladfaust/time_format.cr
