@@ -51,7 +51,7 @@ Crystal is a compiled language. It has different compilation modes, e.g. develop
 
 ### Production build from the source code
 
-0. [Install Crystal](https://crystal-lang.org/docs/installation/) on your machine
+0. [Install Crystal](https://crystal-lang.org/install/) on your machine
 1. Set env vars
 
 ```sh
@@ -79,7 +79,7 @@ JWT_SECRET_KEY="63a051d73d71c997d38946f82e708301"
 
 ### Development build from the source code
 
-0. [Install Crystal](https://crystal-lang.org/docs/installation/) on your machine
+0. [Install Crystal](https://crystal-lang.org/install/) on your machine
 1. Create an `/.env.development.local` file and put some environment variables there (see below)
 2. Apply migrations
 
